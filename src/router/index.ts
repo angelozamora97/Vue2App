@@ -1,6 +1,7 @@
+import AuthRouter from "@/modules/auth/router";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomeView from "@/shared/views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -11,18 +12,19 @@ const routes: Array<RouteConfig> = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
+    path: 'auth',
+    ...AuthRouter,
+  }
+  
 ];
 
 const router = new VueRouter({
   routes,
 });
+
+router.afterEach((to,from) => {
+  console.log('************** ROUTER TO **************');
+  console.log(to);
+})
 
 export default router;
