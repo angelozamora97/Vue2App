@@ -33,6 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Listado de pruebas
 - Meta - VueRouter (Iniciado)
 - Title - VueRouter (Pendiente)
+- Buenas practicas (Pendiente)'
 - Typescript (Pendiente)
 - Typescript - Store (Pendiente)
 - IsComponent (Pendiente)
@@ -41,3 +42,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### NPM usados
 - Bootstrap-vue ( Diseño)
+
+### Buenas practicas
+  - camelCase --> handleEvent , Kebab --> handle-event 
+  - Kebab case en eventos '@on-close'
+  - Declara los Props con camelCase y usa Kebab Case en las plantillas
+  - Uso de computeds para gestionar elementos que se usaran en un v-for
+  - Uso de Vuex
+  - Uso de Vuex con modulos
+  - Componentes con maximo 500 lineas
+  - Components FIRST (Pendiente leer)
