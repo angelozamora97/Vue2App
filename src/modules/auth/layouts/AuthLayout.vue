@@ -11,7 +11,10 @@
 
 <script>
 export default {
-
+  name: 'AuthLayout',
+  created(){
+    console.log('se creo auth layout');
+  }  
 }
 </script>
 

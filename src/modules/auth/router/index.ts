@@ -13,7 +13,7 @@ export default {
       //Parametros que se pueden usar en la ruta
       meta: {
         title: 'Log In',
-        layout: 'page-layout'
+        layout: 'simple-layout'
       }
     },
     // Registro de ruta
@@ -25,7 +25,7 @@ export default {
       //Parametros que se pueden usar en la ruta
       meta: {
         title: 'Sign In',
-        layout: 'page-layout'
+        layout: 'simple-layout'
       }
     },
   ]

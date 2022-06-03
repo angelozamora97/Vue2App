@@ -32,11 +32,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Listado de pruebas
 - Meta - VueRouter (Iniciado)
-- Title - VueRouter (Pendiente)
+- Meta - Title - VueRouter (Terminado)
+- Meta - Validaor - VueRouter (Iniciado)
 - Buenas practicas (Pendiente)'
 - Typescript (Pendiente)
 - Typescript - Store (Pendiente)
-- IsComponent (Pendiente)
+- IsComponent (Iniciado)
 - Uso de Modulos (Pendiente)
 - Documentación de funciones (Pendiente)
 

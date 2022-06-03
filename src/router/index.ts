@@ -3,16 +3,14 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "@/shared/views/Home.vue";
 
-
-
 const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "home",
-    // component: HomeView,
+    component: HomeView,
     meta: {
-      title : 'Home', //Para diferenciar el titulo del documento dependiendo de la vista donde este
-      layout: 'home' //Para obtener el componente padre base dependiendo de la vista
+      title : 'Home', //Para diferenciar el titulo del documento dependiendo de la vista donde este, se usa en el router
+      layout: 'simple-layout' //Para obtener el componente padre base dependiendo de la vista
     }
   },
   {

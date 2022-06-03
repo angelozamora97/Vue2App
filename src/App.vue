@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <!-- <router-view /> -->
+    <!-- El tag 'component' sera remplazado por el componente elegido -->
+    <!-- El componente elegido debe ser importando en este componente padre o en el main de manera global -->
     <component :is="component">
       <template>
         <router-view></router-view>
@@ -9,16 +10,11 @@
   </div>
 </template>
 <script>
-import Home from '@/shared/views/Home.vue'
-import PageLayout from '@/layouts/PageLayout.vue'
+
 export default {
-  components: {
-    Home,
-    PageLayout
-  },
   data(){
     return {
-      component: 'Home'  
+      component: 'simple-layout'  
     }
   },
   created(){
@@ -38,11 +34,9 @@ export default {
     }
   },
   watch:{
+    // Verifica los cambios del route para poder obtener el nombre del componente base padre del meta
     $route: function(value){
-      console.log('gaaaaaaaaa');
-      console.log(value);
-      console.log(value.meta.layout);
-      this.component = value.meta.layout
+      this.component = value.meta.layout || 'page-layout'
     }
   }
 }

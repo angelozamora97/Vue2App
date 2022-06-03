@@ -1,15 +1,14 @@
 <template>
   <div>
-    <!-- Slot donde ingresara el vue router -->
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name:'PageLayout',
+  name:'SimpleLayout',
   created(){
-    console.log('RAAAAAAAAAAA');
+    console.log('RAAAA 222222');
   }
 }
 </script>
