@@ -33,13 +33,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Listado de pruebas
 - Meta - VueRouter (Iniciado)
 - Meta - Title - VueRouter (Terminado)
-- Meta - Validaor - VueRouter (Iniciado)
-- Buenas practicas (Pendiente)'
+- Meta - Validaor - VueRouter (Pendiente)
+- Componentes Dinamicos (Terminado)
+- Buenas practicas (Iniciado)
+- Documentación de funciones (Pendiente)
 - Typescript (Pendiente)
 - Typescript - Store (Pendiente)
-- IsComponent (Iniciado)
-- Uso de Modulos (Pendiente)
-- Documentación de funciones (Pendiente)
+- Uso de Modulos (Iniciado)
 
 ### NPM usados
 - Bootstrap-vue ( Diseño)

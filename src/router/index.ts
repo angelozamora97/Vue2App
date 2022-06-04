@@ -1,4 +1,5 @@
 import AuthRouter from "@/modules/auth/router";
+import PokemonRouter from "@/modules/pokemon/router";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomeView from "@/shared/views/Home.vue";
@@ -16,6 +17,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/auth',
     ...AuthRouter,
+  },
+  {
+    path: '/pokemon',
+    ...PokemonRouter
   }
   
 ];

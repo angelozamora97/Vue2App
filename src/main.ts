@@ -15,7 +15,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
-// Uso global de componentes layouts
+// Uso global de componentes
 Vue.component('page-layout',PageLayout)
 Vue.component('simple-layout',SimpleLayout)
 
