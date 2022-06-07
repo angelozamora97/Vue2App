@@ -36,6 +36,6 @@ export default {
 .body__container{
   /* Altura minima del contenido reduciendo el tamaño del TopBar */
   min-height: calc(100vh - 55px);
-  padding: 15px;
+  padding: 25px;
 }
 </style>

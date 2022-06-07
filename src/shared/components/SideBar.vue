@@ -16,6 +16,8 @@ export default {
 .sidebar__container{
   width: 210px;
   height: 100vh;
+  top: 0;
+  left: 0;
   position: sticky;
   background-color: aqua;
 }

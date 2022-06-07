@@ -1,28 +1,69 @@
 <template>
   <div>
-    Cargando
+    <div class="pokemon__list">
+      <pokemon-card
+        v-for="(pokemon, index) in pokemonList"
+        :key="index"
+        :pokemon="pokemon"
+      ></pokemon-card>
+    </div>
   </div>  
 </template>
 
 <script>
-import axios from 'axios'
+import PokemonCard from '@/modules/pokemon/views/PokemonCard.vue'
+import useJwt from '@/jwt/useJwt'
 export default {
-  created(){
-    this.loadPokemons()
+  components: {
+    PokemonCard,
+  },
+  data(){
+    return {
+      isLoading: true,
+      nextAPI: '',
+      pokemonList: [],
+    }
+  },
+  async created(){
+    this.isLoading = true
+    await this.loadPokemons()
+    this.isLoading = false
   },
   methods: {
     async loadPokemons(){
       console.log('cargando pokemons');
-      const {data} = await axios.get('https://pokeapi.co/api/v2/pokemon')
+      const {data} = await useJwt.getPokemons()
       const {results: pokemons, next} = data
-    
-      console.log(next);
-      console.log(pokemons);
+      this.nextAPI = next
+      this.pokemonList = pokemons
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+  .pokemon__list{
+    display: grid;
+    grid-auto-rows: 210px;
+    /* grid-template-columns: repeat(4,1fr); */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    /* column-gap: 10px;
+    row-gap: 10px; */
+    /* row-gap and column gap */
+    gap: 20px 10px;
+    grid-auto-flow: row;
+  }
 
+
+/* @media (max-width: 991px){
+  .pokemon__list{
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+@media (max-width: 750px){
+  .pokemon__list{
+    grid-template-columns: repeat(2,1fr);
+  }
+} */
 </style>

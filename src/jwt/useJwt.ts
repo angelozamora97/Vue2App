@@ -7,7 +7,4 @@ function useJwt(axiosIns: AxiosInstance, jwtOverrideConfig:any){
 }
 
 const {jwt} = useJwt(axios, {})
-console.log('PRUEBAAAAAAAAAAAAA');
-console.log(jwt);
-console.log('PRUEBAAAAAAAAAAAAA');
 export default jwt

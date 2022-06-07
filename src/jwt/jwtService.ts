@@ -9,10 +9,21 @@ export default class {
   jwtConfig={...jwtDefaultConfig}
 
   // Base URL to API calls
-  baseURL:String = ''
+  baseURL:String = 'https://pokeapi.co/api/v2/'
   
   constructor(axiosins:AxiosInstance, jwtOverrideConfig:any){
     this.axiosIns = axiosins
     this.jwtConfig = {...this.jwtConfig , ...jwtOverrideConfig}
+  }
+
+  getPokemons(){
+    return this.axiosIns.get(
+      this.baseURL + this.jwtConfig.getPokemons
+    )
+  }
+  getApiPokemon(args:string){
+    return this.axiosIns.get(
+      args
+    )
   }
 }
