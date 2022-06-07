@@ -5,6 +5,7 @@
         v-for="(pokemon, index) in pokemonList"
         :key="index"
         :pokemon="pokemon"
+        @on-close="handleEvent"
       ></pokemon-card>
     </div>
   </div>  
@@ -36,6 +37,9 @@ export default {
       const {results: pokemons, next} = data
       this.nextAPI = next
       this.pokemonList = pokemons
+    },
+    handleEvent(){
+      console.log('Se ejectuo el comando');
     }
   }
 }
@@ -44,7 +48,7 @@ export default {
 <style scoped>
   .pokemon__list{
     display: grid;
-    grid-auto-rows: 210px;
+    /* grid-auto-rows: 210px; */
     /* grid-template-columns: repeat(4,1fr); */
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     /* column-gap: 10px;
@@ -55,15 +59,4 @@ export default {
   }
 
 
-/* @media (max-width: 991px){
-  .pokemon__list{
-    grid-template-columns: repeat(3,1fr);
-  }
-}
-
-@media (max-width: 750px){
-  .pokemon__list{
-    grid-template-columns: repeat(2,1fr);
-  }
-} */
 </style>

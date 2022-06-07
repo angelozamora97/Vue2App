@@ -16,11 +16,22 @@ export default class {
     this.jwtConfig = {...this.jwtConfig , ...jwtOverrideConfig}
   }
 
+  /********************************************/
+  /*                  POKEMON                 */
+  /********************************************/
+
+  getPokemon(id:Number){
+    return this.axiosIns.get(
+      this.baseURL + this.jwtConfig.getPokemon + id
+    )
+  }
+
   getPokemons(){
     return this.axiosIns.get(
       this.baseURL + this.jwtConfig.getPokemons
     )
   }
+  
   getApiPokemon(args:string){
     return this.axiosIns.get(
       args

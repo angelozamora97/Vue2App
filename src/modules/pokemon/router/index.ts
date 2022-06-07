@@ -1,3 +1,4 @@
+import { Route } from "vue-router";
 
 export default {
   component: 
@@ -12,6 +13,20 @@ export default {
       },
       component: 
         () => import(/* webpackChunkName: "pokemon-list" */ "@/modules/pokemon/views/PokemonsList.vue")
+    },
+    {
+      path: 'pokemon-detail/:id',
+      name: 'pokemon-detail',
+      meta: {
+        title: 'Pokemon Detalle',
+        layout: 'page-layout',
+      },
+      component: 
+        () => import(/* webpackChunkName: "pokemon-list" */ "@/modules/pokemon/views/PokemonDetail.vue"),
+      props: (route:Route) => {
+        const pokemonId = route.params.id
+        return {pokemonId}
+      }
     },
     {
       path: '/',
