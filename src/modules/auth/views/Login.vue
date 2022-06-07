@@ -58,7 +58,8 @@ export default {
   },
   methods: {
     handleLogin(){
-      console.log();
+      console.log('Se logiea');
+      this.$router.push({name : 'pokemons-list'})
     }
   }
 }
