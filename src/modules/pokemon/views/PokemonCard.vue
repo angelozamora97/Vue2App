@@ -41,14 +41,11 @@ export default {
     async getPokemon(){
       const {data} = await useJwt.getApiPokemon(this.pokemon.url)
       this.pokemonData = data
-      console.log(data);
     },
     handleSeePokemon(){
-      console.log('Llegoo al evento');
       this.$emit('on-close')
     },
     handleSeeDetail(){
-      console.log('Ver detalle')
       this.$router.push({name: 'pokemon-detail', params: {id: this.pokemonData.id}})
     }
   }
@@ -70,7 +67,7 @@ export default {
 
 .pokemon-card__image img{
   width: 100%;
-  height: 150px;
+  height: 100%;
   object-fit: cover;
 }
 .pokemon-card__name {

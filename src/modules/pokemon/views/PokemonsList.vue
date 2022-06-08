@@ -30,6 +30,9 @@ export default {
     await this.loadPokemons()
     this.isLoading = false
   },
+  mounted(){
+    this.onScroll()
+  },
   methods: {
     async loadPokemons(){
       console.log('cargando pokemons');
@@ -40,6 +43,20 @@ export default {
     },
     handleEvent(){
       console.log('Se ejectuo el comando');
+    },
+    onScroll(){
+      window.onscroll = async () =>{
+        const bottomOfWindows = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
+        if(bottomOfWindows){
+          await this.loadMorePokemons()
+        }
+      }
+    },
+    async loadMorePokemons(){
+      const {data} = await useJwt.getApiPokemon(this.nextAPI)
+      const {results: pokemons, next} = data
+      this.nextAPI = next
+      this.pokemonList = this.pokemonList.concat(pokemons)
     }
   }
 }
