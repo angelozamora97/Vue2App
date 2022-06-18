@@ -21,5 +21,9 @@ export default {
     background-color: rgb(162, 0, 255);
     height: 55px;
     padding: 5px 10px;
+    position: sticky;
+    z-index: 3;
+    left: 0;
+    top: 0;
   }
 </style>

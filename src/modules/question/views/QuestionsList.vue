@@ -2,7 +2,7 @@
   <div>
     <b-card>
       <h1 class="card-title">Lista de preguntas</h1>
-      <div>
+      <div class="mt-3">
         <b-table
           bordered hover responsive fixed
           :items="items"
@@ -11,12 +11,10 @@
           :per-page="perPage"
         >
           <template #cell(actions)="">
-            <b-button size="sm" class="mr-1">
-              Info modal
+            <b-button>
+              Editar
             </b-button>
-            <b-button size="sm">
-              Details
-            </b-button>
+
           </template>
 
         
@@ -65,7 +63,7 @@ export default {
       fields:[
         { key: 'title', label: 'Titulo' },
         { key: 'level', label: 'Dificultad'},
-        { key: 'actions', label: 'Actions'},
+        { key: 'actions', label: 'Acción'},
       ]
     }
   }
@@ -74,7 +72,8 @@ export default {
 
 <style scoped>
 .card-title{
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
   text-align: center;
 }
 </style>

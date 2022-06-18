@@ -30,12 +30,16 @@ export default {
 .body__box{
   /* Ancho del contenido reduciendo el tamaño del SideBar */
   width: calc(100% - 210px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 
 .body__container{
   /* Altura minima del contenido reduciendo el tamaño del TopBar */
-  min-height: calc(100vh - 55px);
+  height: 100%;
+  overflow-y: auto;
   padding: 25px;
 }
 </style>
