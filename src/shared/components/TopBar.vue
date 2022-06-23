@@ -18,7 +18,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: rgb(162, 0, 255);
+    background-color: rgb(255, 55, 71);
     height: 55px;
     padding: 5px 10px;
     position: sticky;

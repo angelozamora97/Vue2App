@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pokemon__box">
     <div class="pokemon__list">
       <pokemon-card
         v-for="(pokemon, index) in pokemonList"
@@ -7,12 +7,16 @@
         :pokemon="pokemon"
         @on-close="handleEvent"
       ></pokemon-card>
+      
     </div>
+    <div v-if="isLoadingPokemons" class="pt-5 pb-4 text-center">
+        Loading...
+      </div>
   </div>  
 </template>
 
 <script>
-import PokemonCard from '@/modules/pokemon/views/PokemonCard.vue'
+import PokemonCard from '@/modules/pokemon/views/Components/PokemonCard.vue'
 import useJwt from '@/jwt/useJwt'
 export default {
   components: {
@@ -21,6 +25,7 @@ export default {
   data(){
     return {
       isLoading: true,
+      isLoadingPokemons: false,
       nextAPI: '',
       pokemonList: [],
     }
@@ -35,7 +40,6 @@ export default {
   },
   methods: {
     async loadPokemons(){
-      console.log('cargando pokemons');
       const {data} = await useJwt.getPokemons()
       const {results: pokemons, next} = data
       this.nextAPI = next
@@ -45,10 +49,17 @@ export default {
       console.log('Se ejectuo el comando');
     },
     onScroll(){
-      window.onscroll = async () =>{
-        const bottomOfWindows = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
-        if(bottomOfWindows){
-          await this.loadMorePokemons()
+      const bodyContainer = document.querySelector('.body__container')
+      const pokemonBox = document.querySelector('.pokemon__box')
+      bodyContainer.onscroll = async () =>{
+
+        const bottomOfWindows = bodyContainer.scrollTop + bodyContainer.offsetHeight - 49 >= pokemonBox.offsetHeight
+        if(bottomOfWindows && !this.isLoadingPokemons){
+          this.isLoadingPokemons = true
+          setTimeout( async () => {
+            await this.loadMorePokemons()
+            this.isLoadingPokemons = false
+          }, 1500)
         }
       }
     },
@@ -67,11 +78,11 @@ export default {
     display: grid;
     /* grid-auto-rows: 210px; */
     /* grid-template-columns: repeat(4,1fr); */
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
     /* column-gap: 10px;
     row-gap: 10px; */
     /* row-gap and column gap */
-    gap: 20px 10px;
+    gap: 30px 10px;
     grid-auto-flow: row;
   }
 

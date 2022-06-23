@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .nabvar__box{
   width: 100%;
   height: 100%;
@@ -167,6 +167,7 @@ export default {
 
 .navbar-list__item.active a i {
   transform: translateY(-35px);
+  color: white;
 }
 
 .navbar-list__item.active a span {

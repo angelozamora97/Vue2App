@@ -42,12 +42,30 @@ export default {
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: var(--text-color-primary);
   box-sizing: border-box;
+}
+
+:root{
+  --text-color-primary : #2c3e50;
+  --text-color-secondary: rgb(196, 195, 195);
+  --bg-color-primary: rgb(21, 115, 255);
+  --bg-color-secondary: white;
+  --bg-color-terciary: rgb(240, 240, 240);
+}
+
+:root.dark-mode{
+  --text-color-primary : white;
+  --text-color-secondary: rgb(196, 195, 195);
+  --bg-color-primary: #6959CA;
+  --bg-color-secondary: #22212E;
+  --bg-color-terciary: #191825;
 }
 
 nav {

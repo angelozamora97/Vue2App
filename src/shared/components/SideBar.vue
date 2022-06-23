@@ -4,14 +4,18 @@
       <img src="@/assets/public/pokemon-logo.png" alt="">
     </div>
     <div class="menu__container">
-      <div class="menu__item">
+      <router-link :to="{name : 'pokemons-list'}" class="menu__item">
         <i class="fa-solid fa-paw me-2"></i>
-        <router-link :to="{name : 'pokemons-list'}" class="menu__link">Pokemons</router-link>
-      </div>
-      <div class="menu__item">
+        <span>Pokemons</span>
+      </router-link>
+      <router-link :to="{name : 'questions-list'}" class="menu__item">
         <i class="fa-solid fa-circle-question me-2"></i>
-        <router-link :to="{name : 'questions-list'}" class="menu__link">Questions</router-link>
-      </div>
+        <span>Questions</span>
+      </router-link>
+      <router-link :to="{name : 'navbar'}" class="menu__item">
+        <i class="fa-solid fa-circle-question me-2"></i>
+        <span>Pruebas</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -29,7 +33,7 @@ export default {
   top: 0;
   left: 0;
   position: sticky;
-  background-color: aqua;
+  background-color: var(--bg-color-secondary);
 }
 
 .sidebar__logo{
@@ -48,12 +52,20 @@ export default {
 }
 
 .menu__item{
-  background-color: blueviolet;
-  padding: 8px;
+  padding: 8px 10px 8px 15px;
+  display: block;
+  text-decoration: none;
+  cursor: default;
+  color: var(--text-color-primary);
+}
+.menu__item:hover, 
+.menu__item.router-link-active{
+  background-color: var(--bg-color-primary);
+  color: white;
 }
 
 .menu__link{
   text-decoration: none;
-  color: white;
+  color: var(--text-color-primary);
 }
 </style>

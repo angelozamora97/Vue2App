@@ -2,9 +2,9 @@
   <div class="d-flex">
     <!-- Slot donde ingresara el vue router -->
     <side-bar></side-bar>
-    <div class="body__box bg-warning">
+    <div class="body__box">
       <top-bar></top-bar>
-      <div class="body__container bg-danger">
+      <div class="body__container">
         <slot></slot>
       </div>
     </div>
@@ -41,5 +41,7 @@ export default {
   height: 100%;
   overflow-y: auto;
   padding: 25px;
+  background-color: var(--bg-color-terciary);
+
 }
 </style>
