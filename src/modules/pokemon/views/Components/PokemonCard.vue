@@ -13,7 +13,7 @@
       <div class="card__info">
         <h1>{{pokemonData.name}}</h1>
         <h2>
-          <span v-for="(type, index) in pokemonData.types" :key="index" class="mx-1">{{type.type.name}}</span>
+          <span v-for="(type, index) in pokemonData.types" :key="index" class="mx-1">{{upperText(type.type.name)}}</span>
         </h2>
       </div>
       <div class="card__data" :class="{'active' : isFixed}">
@@ -44,6 +44,8 @@
 <script>
 import useJwt from '@/jwt/useJwt'
 import PokeButton from '@/shared/components/PokeButton.vue'
+import { parseUpperText } from '@/utils/ParseData'
+
 export default {
   name: 'PokemonCard',
   components: {
@@ -82,7 +84,11 @@ export default {
     },
     handleSeeDetail(){
       this.$router.push({name: 'pokemon-detail', params: {id: this.pokemonData.id}})
-    }
+    },
+    // Convierte la primera letra en mayuscula
+    upperText(text){
+      return parseUpperText(text)
+    },
   }
 }
 </script>

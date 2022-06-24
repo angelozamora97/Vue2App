@@ -6,9 +6,9 @@
         <span><i class="fa-solid fa-moon"></i></span>
         <div class="switch-mode__circle"></div>
       </button>
-      <button>
-        Cerra Session
-      </button>
+      <div class="topbar__user">
+
+      </div>
 
     </div>
   </div>
@@ -48,7 +48,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 8px 15px;
-  border-radius: 4px;
+  border-radius: 25px;
   background-color: var(--bg-color-primary);
   transition: all var(--time-transition) ease-in-out;
   justify-content: space-between;
@@ -102,5 +102,15 @@ export default {
 
 .switch-mode__dark .switch-mode__circle{
   transform: translateX(0px) !important;
+}
+
+/* **************** */
+/*   TOP BAR USER   */
+/* **************** */
+.topbar__user{
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+  background-color: var(--bg-color-base);
 }
 </style>

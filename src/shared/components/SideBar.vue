@@ -58,6 +58,7 @@ export default {
   text-decoration: none;
   cursor: default;
   color: var(--text-color-primary);
+  cursor: pointer;
 }
 .menu__item:hover, 
 .menu__item.router-link-active{

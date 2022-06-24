@@ -1,9 +1,9 @@
 <template>
-  <div class="pk-detail__container" :class="pokemon ? getTypeClass(pokemon.types[0].type.name) : ''">
-    <div class="pk-detail__figure pk-detail__figure1"></div>
-    <div class="pk-detail__figure pk-detail__figure2"></div>
-    <div class="pk-detail__figure pk-detail__figure3"></div>
-    <div class="pk-detail__figure pk-detail__figure4"></div>
+  <div class="pk-detail__container" :class="getClassPokemon">
+    <div class="pk-detail__figure pk-detail__figure1" :class="lightClassPokemon"></div>
+    <div class="pk-detail__figure pk-detail__figure2" :class="lightClassPokemon"></div>
+    <div class="pk-detail__figure pk-detail__figure3" :class="lightClassPokemon"></div>
+    <div class="pk-detail__figure pk-detail__figure4" :class="lightClassPokemon"></div>
     <div v-if="isLoading && !pokemon">Cargando</div>
     <b-row class="mx-0 pk-detail__content" v-else>
       <b-col cols="12" class="d-flex justify-content-between  icon-list mb-4">
@@ -13,9 +13,9 @@
       
       <!-- <h1 class="pk-detail__name">{{pokemon.name}}</h1> -->
       <b-col cols="12" lg="7" class="">
-        <h1 class="pk-detail__name">{{parseUpperText(pokemon.name)}}</h1>
+        <h1 class="pk-detail__name">{{upperText(pokemon.name)}}</h1>
         <div class="types">
-          <span class="types__item" v-for="(typeItem, index) in pokemon.types" :key="index">{{parseUpperText(typeItem.type.name)}}</span>
+          <span class="types__item" v-for="(typeItem, index) in pokemon.types" :key="index">{{upperText(typeItem.type.name)}}</span>
         </div>
         <div class="pk-detail__image">
           <div class="pk-detail__circle"></div>
@@ -63,6 +63,8 @@
 
 <script>
 import useJwt from '@/jwt/useJwt'
+import { parseUpperText } from '@/utils/ParseData'
+import { classByType, lightClassByType} from '@/utils/Type'
 export default {
   props: {
     pokemonId: {
@@ -75,40 +77,40 @@ export default {
       isLoading: true,
       pokemon: null,
       tabSelected: 1,
+      classPokemon: '',
+      lightClassPokemon: '',
     }
   },
   async created(){
     console.log(this.pokemonId);
     this.isLoading = true
     await this.getPokemon()
+    this.configPokemon()
     this.isLoading = false
   },
   methods: {
     //Obtener los datos del pokemon
     async getPokemon(){
       const {data} = await useJwt.getPokemon(this.pokemonId)
-      console.log(data);
       this.pokemon = data
+    },
+    // Configurar el pokemon por su tipo
+    configPokemon(){
+      this.classPokemon = classByType(this.pokemon.types[0].type.name)
+      this.lightClassPokemon = lightClassByType(this.pokemon.types[0].type.name)
     },
     //Cambiar el tab
     hanldeChangeTab(tab){
       this.tabSelected = tab
     },
-
     // Convierte la primera letra en mayuscula
-    parseUpperText(text){
-      return text[0].toUpperCase() + text.substring(1)
+    upperText(text){
+      return parseUpperText(text)
     },
-    // Obtiene la clase dependiendo del tipo del pokemon
-    getTypeClass(type){
-      const typeClass = {
-        'fire': () => 'pk-detail__container--fire',
-        'water': () => 'pk-detail__container--water',
-        'grass': () => 'pk-detail__container--grass',
-        'bug': () => 'pk-detail__container--bug',
-      }
-
-      return typeClass[type]? typeClass[type]() : ''
+  },
+  computed: {
+    getClassPokemon(){
+      return this.classPokemon
     }
   }
 
@@ -119,10 +121,11 @@ export default {
 .pk-detail__container{
   position: relative;
   padding: 25px 30px;
-  background-color: #FC6C6D;
+  background-color: var(--bg-color-primary);
   overflow: hidden;
   border-radius: 10px;
   z-index: 0;
+  transition: all var(--time-transition) ease-in-out;
 }
 
 
@@ -280,7 +283,7 @@ export default {
 
 /* POKEMON CARD */
 
-
+/* 
 .pk-detail__container--fire{
   background-color: #FC6C6D;
 }
@@ -297,9 +300,15 @@ export default {
 .pk-detail__container--bug{
   background-color: #7D528D;
 }
+.pk-detail__container--ground{
+  background-color: #B2746C;
+}
+.pk-detail__container--normal{
+  background-color: #fcc367;
+} */
 
 /* POKEMON FIGURES */
-.pk-detail__container--fire .pk-detail__figure,
+/* .pk-detail__container--fire .pk-detail__figure,
 .pk-detail__container--fire .pk-detail__circle,
 .pk-detail__container--fire .types__item
 {
@@ -330,6 +339,18 @@ export default {
 {
   background-color: rgb(151, 106, 168);
 }
+.pk-detail__container--ground .pk-detail__figure,
+.pk-detail__container--ground .pk-detail__circle,
+.pk-detail__container--ground .types__item
+{
+  background-color: #C28780;
+}
+.pk-detail__container--normal .pk-detail__figure,
+.pk-detail__container--normal .pk-detail__circle,
+.pk-detail__container--normal .types__item
+{
+  background-color: #fdd492;
+} */
 
 
 /* ***** EXTRA ***** */

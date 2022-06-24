@@ -1,0 +1,49 @@
+/* ******************** */
+/*    POKEMONS COLOR    */
+/* ******************** */
+.pokemon-color--fire{
+  background-color: #FC6C6D !important;
+}
+.pokemon-color--water{
+  background-color: #76BEFE !important;
+  
+}
+.pokemon-color--grass{
+  background-color: #46D0B2 !important;
+}
+.pokemon-color--electric{
+  background-color: #FFCF4A !important;
+}
+.pokemon-color--bug{
+  background-color: #7D528D !important;
+}
+.pokemon-color--ground{
+  background-color: #B2746C !important;
+}
+.pokemon-color--normal{
+  background-color: #fcc367 !important;
+}
+
+
+.pokemon-color__light--fire {
+  background-color: #FC8081 !important;
+}
+.pokemon-color__light--water {
+  background-color: #91CAFD !important;
+}
+.pokemon-color__light--grass {
+  background-color: #57E3B7 !important;
+}
+.pokemon-color__light--electric {
+  background-color: #FFD856 !important;
+}
+
+.pokemon-color__light--bug {
+  background-color: rgb(151, 106, 168) !important;
+}
+.pokemon-color__light--ground {
+  background-color: #C28780 !important;
+}
+.pokemon-color__light--normal {
+  background-color: #fdd492 !important;
+}
