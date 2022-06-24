@@ -55,17 +55,21 @@ export default {
 :root{
   --text-color-primary : #2c3e50;
   --text-color-secondary: rgb(196, 195, 195);
-  --bg-color-primary: rgb(21, 115, 255);
-  --bg-color-secondary: white;
-  --bg-color-terciary: rgb(240, 240, 240);
+  --bg-color-base: rgb(240, 240, 240);
+  --bg-color-primary: white;
+  --bg-color-secondary: rgb(47, 130, 255);
+  --button-color-switchmode: rgb(240, 240, 240);
+  --button-border-color: rgb(196, 195, 195);
+  --time-transition: 0.5s;
 }
 
 :root.dark-mode{
   --text-color-primary : white;
   --text-color-secondary: rgb(196, 195, 195);
-  --bg-color-primary: #6959CA;
-  --bg-color-secondary: #22212E;
-  --bg-color-terciary: #191825;
+  --bg-color-base: #191825;
+  --bg-color-primary: #22212E;
+  --bg-color-secondary: #7463e4;
+  --button-color-switchmode: #7463e4;
 }
 
 nav {

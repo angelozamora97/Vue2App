@@ -4,7 +4,10 @@
       <h1>cargando</h1>
     </div>
     <div class="card__content" v-else>
-      <div class="card__image">
+      <div class="card__tack" :class="{'active' : isFixed}">
+        <i class="fa-solid fa-thumbtack" @click="fixCard" ></i>
+      </div>
+      <div class="card__image" :class="{'active' : isFixed}">
         <img :src="pokemonData.sprites.front_default" alt="pokemon">
       </div>
       <div class="card__info">
@@ -13,7 +16,7 @@
           <span v-for="(type, index) in pokemonData.types" :key="index" class="mx-1">{{type.type.name}}</span>
         </h2>
       </div>
-      <div class="card__body">
+      <div class="card__data" :class="{'active' : isFixed}">
         <div class="data-box">
           <div class="data-box__item">
             <span class="data-box__number">{{pokemonData.stats[0].base_stat}}</span>
@@ -30,7 +33,7 @@
           
         </div>
         <div class="card__button">
-          <b-button variant="primary" @click="handleSeeDetail">Ver detalle</b-button>
+          <poke-button @on-click="handleSeeDetail" text="Ver detalle"/>
         </div>
       </div>
     </div>
@@ -40,8 +43,12 @@
 
 <script>
 import useJwt from '@/jwt/useJwt'
+import PokeButton from '@/shared/components/PokeButton.vue'
 export default {
   name: 'PokemonCard',
+  components: {
+    PokeButton
+  },
   props: {
     pokemon: {
       type: Object,
@@ -52,6 +59,7 @@ export default {
     return {
       isLoading: true,
       pokemonData: null,
+      isFixed: false,
     }
   },
   async created(){
@@ -60,12 +68,17 @@ export default {
     this.isLoading = false
   },
   methods: {
+    // Obtener datos del pokemon
     async getPokemon(){
       const {data} = await useJwt.getApiPokemon(this.pokemon.url)
       this.pokemonData = data
     },
     handleSeePokemon(){
       this.$emit('on-close')
+    },
+    // Fijar tarjeta
+    fixCard(){
+      this.isFixed= !this.isFixed
     },
     handleSeeDetail(){
       this.$router.push({name: 'pokemon-detail', params: {id: this.pokemonData.id}})
@@ -75,13 +88,15 @@ export default {
 </script>
 
 <style scoped>
-
+/* **************************** */
+/*          CARD ITEM           */
+/* **************************** */
 .card__item{
   padding: 15px;
   margin: auto;
   background-color: var(--bg-color-primary);
+  transition: all var(--time-transition) ease-in-out;
   position: relative;
-  /* width: 270px; */
   width: 100%;
   border-radius: 10px;
 }
@@ -90,6 +105,27 @@ export default {
   width: 150px;
   height: 150px;
   transform: scale(1.2) translateY(-10px);
+}
+
+/* **************************** */
+/*         CARD CONTENT         */
+/* **************************** */
+.card__content{
+  position: relative;
+}
+
+.card__tack{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.card__tack:hover{
+  color: var(--bg-color-secondary);
+}
+
+.card__tack.active i{
+  color: var(--bg-color-secondary);
 }
 
 .card__image{
@@ -101,6 +137,12 @@ export default {
   transform-origin: bottom;
 }
 
+.card__image.active{
+  width: 150px;
+  height: 150px;
+  transform: scale(1.2) translateY(-10px);
+}
+
 .card__image img{
   height: 100%;
   width: 100%;
@@ -109,7 +151,6 @@ export default {
 }
 
 .card__info{
-  /* background-color: brown; */
   text-align: center;
   display: flow-root;
 }
@@ -122,17 +163,24 @@ export default {
 .card__info h2{
   font-size: 0.9rem;
   margin-bottom: 0;
-
 }
 
-.card__body{
+/* **************************** */
+/*           CARD DATA          */
+/* **************************** */
+.card__data{
   max-height: 0;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
   padding: 0;
 }
 
-.card__item:hover .card__body{
+.card__item:hover .card__data{
+  max-height: 120px;
+}
+
+/* Tarjeta fijada */
+.card__data.active{
   max-height: 120px;
 }
 
@@ -160,7 +208,7 @@ export default {
 }
 
 .card__button{
-  margin-top: 10px;
+  padding-top: 20px;
   text-align: right;
 }
 </style>

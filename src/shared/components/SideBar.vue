@@ -33,7 +33,8 @@ export default {
   top: 0;
   left: 0;
   position: sticky;
-  background-color: var(--bg-color-secondary);
+  background-color: var(--bg-color-primary);
+  transition: all var(--time-transition) ease-in-out;
 }
 
 .sidebar__logo{
@@ -60,12 +61,17 @@ export default {
 }
 .menu__item:hover, 
 .menu__item.router-link-active{
-  background-color: var(--bg-color-primary);
+  background-color: var(--bg-color-secondary);
   color: white;
+}
+
+.menu__item.router-link-active{
+  transition: all var(--time-transition) ease-in-out;
 }
 
 .menu__link{
   text-decoration: none;
   color: var(--text-color-primary);
+  transition: all var(--time-transition) ease-in-out;
 }
 </style>

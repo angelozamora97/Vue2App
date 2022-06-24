@@ -24,7 +24,7 @@ export default {
       component: 
         () => import(/* webpackChunkName: "pokemon-list" */ "@/modules/pokemon/views/PokemonDetail.vue"),
       props: (route:Route) => {
-        const pokemonId = route.params.id
+        const pokemonId = Number(route.params.id)
         return {pokemonId}
       }
     },

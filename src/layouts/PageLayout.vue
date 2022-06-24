@@ -41,7 +41,7 @@ export default {
   height: 100%;
   overflow-y: auto;
   padding: 25px;
-  background-color: var(--bg-color-terciary);
-
+  background-color: var(--bg-color-base);
+  transition: all var(--time-transition) ease-in-out;
 }
 </style>

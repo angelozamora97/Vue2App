@@ -1,27 +1,28 @@
 <template>
-  <div class="pk-detail__container">
+  <div class="pk-detail__container" :class="pokemon ? getTypeClass(pokemon.types[0].type.name) : ''">
     <div class="pk-detail__figure pk-detail__figure1"></div>
     <div class="pk-detail__figure pk-detail__figure2"></div>
     <div class="pk-detail__figure pk-detail__figure3"></div>
     <div class="pk-detail__figure pk-detail__figure4"></div>
     <div v-if="isLoading && !pokemon">Cargando</div>
     <b-row class="mx-0 pk-detail__content" v-else>
-      <b-col cols="12" class="d-flex justify-content-between px-0 icon-list">
-        <i class="fa-solid fa-arrow-left icon-list__item"></i>
-        <i class="fa-solid fa-heart icon-list__item"></i>
+      <b-col cols="12" class="d-flex justify-content-between  icon-list mb-4">
+        <i class="fa-solid fa-arrow-left icon-list__item icon__action" @click="$router.push({name : 'pokemons-list'})"></i>
+        <i class="fa-solid fa-heart icon-list__item icon__action"></i>
       </b-col>
-      <h1 class="pk-detail__name">Charmander</h1>
-      <div class="types">
-        <span class="types__item">Fire</span>
-      </div>
+      
       <!-- <h1 class="pk-detail__name">{{pokemon.name}}</h1> -->
       <b-col cols="12" lg="7" class="">
+        <h1 class="pk-detail__name">{{parseUpperText(pokemon.name)}}</h1>
+        <div class="types">
+          <span class="types__item" v-for="(typeItem, index) in pokemon.types" :key="index">{{parseUpperText(typeItem.type.name)}}</span>
+        </div>
         <div class="pk-detail__image">
           <div class="pk-detail__circle"></div>
           <img :src="pokemon.sprites.other.dream_world.front_default" alt="pokemon">
         </div>
         <h2 class="pk-detail__health">2100 CP</h2>
-        <button @click="probar">asd</button>
+
       </b-col>
       <b-col cols="12" lg="5">
         <div class="pk-data">
@@ -65,7 +66,7 @@ import useJwt from '@/jwt/useJwt'
 export default {
   props: {
     pokemonId: {
-      type: String,
+      type: Number,
       required: true,
     }
   },
@@ -93,9 +94,21 @@ export default {
     hanldeChangeTab(tab){
       this.tabSelected = tab
     },
-    //Prueba del cambio dark mode
-    probar(){
-      document.documentElement.classList.toggle('dark-mode')
+
+    // Convierte la primera letra en mayuscula
+    parseUpperText(text){
+      return text[0].toUpperCase() + text.substring(1)
+    },
+    // Obtiene la clase dependiendo del tipo del pokemon
+    getTypeClass(type){
+      const typeClass = {
+        'fire': () => 'pk-detail__container--fire',
+        'water': () => 'pk-detail__container--water',
+        'grass': () => 'pk-detail__container--grass',
+        'bug': () => 'pk-detail__container--bug',
+      }
+
+      return typeClass[type]? typeClass[type]() : ''
     }
   }
 
@@ -108,16 +121,16 @@ export default {
   padding: 25px 30px;
   background-color: #FC6C6D;
   overflow: hidden;
-  /* #FC8081 */
   border-radius: 10px;
   z-index: 0;
 }
 
+
 .pk-detail__figure{
   position: absolute;
-  background-color: #FC8081;
   z-index: -1;
 }
+
 
 .pk-detail__figure1{
   width: 150px;
@@ -209,7 +222,6 @@ export default {
   width: 210px;
   height: 210px;
   border-radius: 100%;
-  background-color: #FC8081;
 }
 
 .pk-detail__health{
@@ -227,10 +239,11 @@ export default {
 }
 
 .types__item{
-  padding: 5px 15px;
-  background-color: aqua;
+  padding: 5px 18px;
   border-radius: 25px;
   margin-right: 10px;
+  color: white;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.089);
 }
 
 /* ****************************** */
@@ -238,7 +251,8 @@ export default {
 /* ****************************** */
 .pk-data{
   padding: 20px;
-  background-color: var(--bg-color-secondary);
+  background-color: var(--bg-color-primary);
+  transition: all var(--time-transition) ease-in-out;
   border-radius: 25px;
 }
 
@@ -257,10 +271,69 @@ export default {
 .pk-data__tab.active,
 .pk-data__tab:hover{
   color: var(--text-color-primary);
-  border-bottom: 2px solid var(--bg-color-primary);
+  border-bottom: 2px solid var(--bg-color-secondary);
 }
 
-button{
-  background-color: var(--color);
+/* *********************************** */
+/*        POKEMON COLORS CHANGES       */
+/* *********************************** */
+
+/* POKEMON CARD */
+
+
+.pk-detail__container--fire{
+  background-color: #FC6C6D;
+}
+.pk-detail__container--water{
+  background-color: #76BEFE;
+  
+}
+.pk-detail__container--grass{
+  background-color: #46D0B2;
+}
+.pk-detail__container--electric{
+  background-color: #FFCF4A;
+}
+.pk-detail__container--bug{
+  background-color: #7D528D;
+}
+
+/* POKEMON FIGURES */
+.pk-detail__container--fire .pk-detail__figure,
+.pk-detail__container--fire .pk-detail__circle,
+.pk-detail__container--fire .types__item
+{
+  background-color: #FC8081;
+}
+.pk-detail__container--water .pk-detail__figure,
+.pk-detail__container--water .pk-detail__circle,
+.pk-detail__container--water .types__item
+{
+  background-color: #91CAFD;
+}
+.pk-detail__container--grass .pk-detail__figure,
+.pk-detail__container--grass .pk-detail__circle,
+.pk-detail__container--grass .types__item
+{
+  background-color: #57E3B7;
+}
+.pk-detail__container--electric .pk-detail__figure,
+.pk-detail__container--electric .pk-detail__circle,
+.pk-detail__container--electric .types__item
+{
+  background-color: #FFD856;
+}
+
+.pk-detail__container--bug .pk-detail__figure,
+.pk-detail__container--bug .pk-detail__circle,
+.pk-detail__container--bug .types__item
+{
+  background-color: rgb(151, 106, 168);
+}
+
+
+/* ***** EXTRA ***** */
+.icon__action:hover{
+  color: var(--bg-color-secondary);
 }
 </style>
