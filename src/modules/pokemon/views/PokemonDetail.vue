@@ -1,5 +1,6 @@
 <template>
-  <div class="pk-detail__container" :class="getClassPokemon">
+  <div 
+  class="pk-detail__container" :class="classPokemonType">
     <div class="pk-detail__figure pk-detail__figure1" :class="lightClassPokemon"></div>
     <div class="pk-detail__figure pk-detail__figure2" :class="lightClassPokemon"></div>
     <div class="pk-detail__figure pk-detail__figure3" :class="lightClassPokemon"></div>
@@ -11,11 +12,10 @@
         <i class="fa-solid fa-heart icon-list__item icon__action"></i>
       </b-col>
       
-      <!-- <h1 class="pk-detail__name">{{pokemon.name}}</h1> -->
       <b-col cols="12" lg="7" class="">
         <h1 class="pk-detail__name">{{upperText(pokemon.name)}}</h1>
         <div class="types">
-          <span class="types__item" v-for="(typeItem, index) in pokemon.types" :key="index">{{upperText(typeItem.type.name)}}</span>
+          <span class="types__item" v-for="(typeItem, index) in pokemon.types" :key="index" :class="lightClassPokemon">{{upperText(typeItem.type.name)}}</span>
         </div>
         <div class="pk-detail__image">
           <div class="pk-detail__circle"></div>
@@ -40,12 +40,85 @@
               Moves
             </div>
           </div>
-          <div class="pk-data__content">
-            <div v-if="tabSelected == 1">
-              <span>Tab1</span>
+          <div class="tab__content">
+            <div v-if="tabSelected == 1 && species" class="tab__item pt-2">
+              <span>
+                {{species.flavor_text_entries[0].flavor_text}}
+              </span>
+              <div class="d-flex justify-content-around flex-wrap pt-3 ">
+                <div class="pokemon__border-radius pokemon__box-shadow py-1 px-4 m-2">
+                  <span class="d-block tab__title--light" >Height</span>
+                  <span class="d-block tab__number">{{parseNumber(pokemon.height)}} m</span>
+                </div>
+                <div class="pokemon__border-radius pokemon__box-shadow py-1 px-4 m-2">
+                  <span class="d-block tab__title--light">Weight</span>
+                  <span class="d-block tab__number">{{parseNumber(pokemon.weight)}} Kg</span>
+                </div>
+              </div>
+              <div class="pt-3">
+                <p class="mb-1 tab__title">
+                  <span class=" tab__title--light me-1">Base Experience:</span>
+                  <span class=" tab__title--color ">{{pokemon.base_experience}}</span>
+                </p>
+                <p class="mb-1 tab__title">
+                  <span class=" tab__title--light me-1">Growth Rate:</span>
+                  {{upperText(species.growth_rate.name)}}
+                </p>
+                <p class="mb-1 tab__title">
+                  <span class="tab__title--light me-1">Habitat:</span>
+                  {{upperText(species.habitat.name)}}</p>
+                <p class="mb-1 tab__title">
+                  <span class=" tab__title--light me-1">Gender Differences:</span>
+                  <span class=" tab__title--color ">{{species.has_gender_differences ? 'YES' : 'NO'}}</span>
+                </p>
+              </div>
             </div>
-            <div v-if="tabSelected == 2">
-              <span>Tab2</span>
+            <div v-if="tabSelected == 2" class="tab__item pt-2">
+              <!-- <line-range :value="valuePrueba" :max="max" :min="min"></line-range> -->
+              <div class="tab__range-box">
+                <span class="tab__range-name">HP</span>
+                <span class="tab__range-value">{{pokemon.stats[0].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-hp" :value="pokemon.stats[0].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+              <div class="tab__range-box">
+                <span class="tab__range-name">Attack</span>
+                <span class="tab__range-value">{{pokemon.stats[1].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-attack" :value="pokemon.stats[1].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+              <div class="tab__range-box">
+                <span class="tab__range-name">Defense</span>
+                <span class="tab__range-value">{{pokemon.stats[2].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-deffense" :value="pokemon.stats[2].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+              <div class="tab__range-box">
+                <span class="tab__range-name">Sp. Atk</span>
+                <span class="tab__range-value">{{pokemon.stats[3].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-sp-attack" :value="pokemon.stats[3].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+              <div class="tab__range-box">
+                <span class="tab__range-name">Sp. Def</span>
+                <span class="tab__range-value">{{pokemon.stats[4].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-sp-deffence" :value="pokemon.stats[4].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+              <div class="tab__range-box">
+                <span class="tab__range-name">Speed</span>
+                <span class="tab__range-value">{{pokemon.stats[5].base_stat}}</span>
+                <div class="d-flex  align-items-center">
+                  <line-range name="range-speed" :value="pokemon.stats[5].base_stat" :max="100" :min="0"></line-range>
+                </div>
+              </div>
+
+
             </div>
             <div v-if="tabSelected == 3">
               <span>Tab3</span>
@@ -65,7 +138,11 @@
 import useJwt from '@/jwt/useJwt'
 import { parseUpperText } from '@/utils/ParseData'
 import { classByType, lightClassByType} from '@/utils/Type'
+import LineRange from '@/shared/components/LineRange.vue'
 export default {
+  components: {
+    LineRange
+  },
   props: {
     pokemonId: {
       type: Number,
@@ -76,15 +153,20 @@ export default {
     return {
       isLoading: true,
       pokemon: null,
+      species: null,
       tabSelected: 1,
       classPokemon: '',
       lightClassPokemon: '',
+      valuePrueba: 50,
+      max: 100,
+      min: 0,
     }
   },
   async created(){
     console.log(this.pokemonId);
     this.isLoading = true
     await this.getPokemon()
+    await this.getDataSpecies()
     this.configPokemon()
     this.isLoading = false
   },
@@ -93,6 +175,15 @@ export default {
     async getPokemon(){
       const {data} = await useJwt.getPokemon(this.pokemonId)
       this.pokemon = data
+      console.log('********* POKEMON *********');
+      console.log(data);
+    },
+    //Obtener los datos del pokemon
+    async getDataSpecies(){
+      const {data} = await useJwt.getApiPokemon(this.pokemon.species.url)
+      this.species = data
+      console.log('********* SPECIES *********');
+      console.log(this.species);
     },
     // Configurar el pokemon por su tipo
     configPokemon(){
@@ -107,9 +198,14 @@ export default {
     upperText(text){
       return parseUpperText(text)
     },
+    // Convierte la primera letra en mayuscula
+    parseNumber(number){
+      return Number(number) / 10
+    },
   },
   computed: {
-    getClassPokemon(){
+    //Devuelve la clase del pokemon por su tipo
+    classPokemonType(){
       return this.classPokemon
     }
   }
@@ -277,82 +373,36 @@ export default {
   border-bottom: 2px solid var(--bg-color-secondary);
 }
 
-/* *********************************** */
-/*        POKEMON COLORS CHANGES       */
-/* *********************************** */
-
-/* POKEMON CARD */
-
-/* 
-.pk-detail__container--fire{
-  background-color: #FC6C6D;
+.tab__title{
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all var(--time-transition) ease-in;
 }
-.pk-detail__container--water{
-  background-color: #76BEFE;
-  
-}
-.pk-detail__container--grass{
-  background-color: #46D0B2;
-}
-.pk-detail__container--electric{
-  background-color: #FFCF4A;
-}
-.pk-detail__container--bug{
-  background-color: #7D528D;
-}
-.pk-detail__container--ground{
-  background-color: #B2746C;
-}
-.pk-detail__container--normal{
-  background-color: #fcc367;
-} */
-
-/* POKEMON FIGURES */
-/* .pk-detail__container--fire .pk-detail__figure,
-.pk-detail__container--fire .pk-detail__circle,
-.pk-detail__container--fire .types__item
-{
-  background-color: #FC8081;
-}
-.pk-detail__container--water .pk-detail__figure,
-.pk-detail__container--water .pk-detail__circle,
-.pk-detail__container--water .types__item
-{
-  background-color: #91CAFD;
-}
-.pk-detail__container--grass .pk-detail__figure,
-.pk-detail__container--grass .pk-detail__circle,
-.pk-detail__container--grass .types__item
-{
-  background-color: #57E3B7;
-}
-.pk-detail__container--electric .pk-detail__figure,
-.pk-detail__container--electric .pk-detail__circle,
-.pk-detail__container--electric .types__item
-{
-  background-color: #FFD856;
+.tab__title--light{
+  color: var(--text-color-secondary);
 }
 
-.pk-detail__container--bug .pk-detail__figure,
-.pk-detail__container--bug .pk-detail__circle,
-.pk-detail__container--bug .types__item
-{
-  background-color: rgb(151, 106, 168);
+.tab__title--color{
+  color: var(--bg-color-secondary);
 }
-.pk-detail__container--ground .pk-detail__figure,
-.pk-detail__container--ground .pk-detail__circle,
-.pk-detail__container--ground .types__item
-{
-  background-color: #C28780;
+
+.tab__number{
+  font-weight: 600;
 }
-.pk-detail__container--normal .pk-detail__figure,
-.pk-detail__container--normal .pk-detail__circle,
-.pk-detail__container--normal .types__item
-{
-  background-color: #fdd492;
-} */
 
+.tab__range-box{
+  display: grid;
+  grid-template-columns: 70px 40px 1fr;
+  margin-bottom: 10px;
+}
 
+.tab__range-name{
+  color: var(--text-color-secondary);
+  font-weight: 600;
+}
+.tab__range-value{
+  font-weight: 600;
+}
 /* ***** EXTRA ***** */
 .icon__action:hover{
   color: var(--bg-color-secondary);

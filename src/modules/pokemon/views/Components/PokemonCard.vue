@@ -4,8 +4,8 @@
       <h1>cargando</h1>
     </div>
     <div class="card__content" v-else>
-      <div class="card__tack" :class="{'active' : isFixed}">
-        <i class="fa-solid fa-thumbtack" @click="fixCard" ></i>
+      <div class="card__tack" :class="{'active' : isFixed}" @click="fixCard">
+        <i class="fa-solid fa-thumbtack"  ></i>
       </div>
       <div class="card__image" :class="{'active' : isFixed}">
         <img :src="pokemonData.sprites.front_default" alt="pokemon">

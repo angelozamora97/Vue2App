@@ -47,3 +47,12 @@
 .pokemon-color__light--normal {
   background-color: #fdd492 !important;
 }
+
+
+.pokemon__box-shadow{
+  box-shadow: 0px 4px 8px var(--border-shadow);
+}
+
+.pokemon__border-radius{
+  border-radius: 15px;
+}
