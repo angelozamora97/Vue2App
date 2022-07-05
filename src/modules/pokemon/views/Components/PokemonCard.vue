@@ -13,7 +13,12 @@
       <div class="card__info">
         <h1>{{pokemonData.name}}</h1>
         <h2>
-          <span v-for="(type, index) in pokemonData.types" :key="index" class="mx-1">{{upperText(type.type.name)}}</span>
+          <span
+            v-for="(type, index) in pokemonData.types"
+            :key="index"
+            class="card__type mx-1"
+            :class="pokemonClass(type.type.name)"
+          >{{upperText(type.type.name)}}</span>
         </h2>
       </div>
       <div class="card__data" :class="{'active' : isFixed}">
@@ -30,22 +35,31 @@
             <span class="data-box__number">{{pokemonData.stats[1].base_stat}}</span>
             <span class="data-box__name">Ataque</span>
           </div>
-          
+
         </div>
         <div class="card__button">
           <poke-button @on-click="handleSeeDetail" text="Ver detalle"/>
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
 
 <script>
+//Activa validaciones de typescript
+//@ts-check
 import useJwt from '@/jwt/useJwt'
 import PokeButton from '@/shared/components/PokeButton.vue'
+import { classByType} from '@/utils/Type'
 import { parseUpperText } from '@/utils/ParseData'
 
+/**
+ * @vue-prop {Object} pokemon - Datos basicos del pokemon
+ * @vue-data {Boolean} isLoading- Estado de carga de los datos
+ * @vue-data {Boolean} isFixed - Estado de fijación de la card
+ * @vue-data {{id: string}} pokemonData - Datos del pokemon
+ */
 export default {
   name: 'PokemonCard',
   components: {
@@ -60,7 +74,9 @@ export default {
   data(){
     return {
       isLoading: true,
-      pokemonData: null,
+      pokemonData: {
+        id: '0',
+      },
       isFixed: false,
     }
   },
@@ -70,24 +86,50 @@ export default {
     this.isLoading = false
   },
   methods: {
-    // Obtener datos del pokemon
+    /**
+     * Obtener los datos del pokemon
+     * @returns {Promise<void>}
+     */
     async getPokemon(){
       const {data} = await useJwt.getApiPokemon(this.pokemon.url)
       this.pokemonData = data
     },
+    /**
+     * Emitir el evento 'on-close'
+     * @returns {void}
+     */
     handleSeePokemon(){
       this.$emit('on-close')
     },
-    // Fijar tarjeta
+    /**
+     * Fijar la pokemon-card en su altura maxima
+     * @returns {void}
+     */
     fixCard(){
       this.isFixed= !this.isFixed
     },
+    /**
+     * routear a la vista 'pokemon-detail'
+     * @returns {void}
+     */
     handleSeeDetail(){
       this.$router.push({name: 'pokemon-detail', params: {id: this.pokemonData.id}})
     },
-    // Convierte la primera letra en mayuscula
+    /**
+     * Convertir la primera letra del texto en mayuscula
+     * @param {string} text - Texto de entrada
+     * @returns {string}
+     */
     upperText(text){
       return parseUpperText(text)
+    },
+    /**
+     * Obtiene la clase css del pokemon dependiendo de su tipo
+     * @param {string} type - Tipo del pokemon
+     * @returns {string} - Clase css del pokemon
+     */
+    pokemonClass(type){
+      return classByType(type)
     },
   }
 }
@@ -169,6 +211,13 @@ export default {
 .card__info h2{
   font-size: 0.9rem;
   margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card__type{
+  padding: 1px 8px ;
+  border-radius: 25px;
+  color: white;
 }
 
 /* **************************** */

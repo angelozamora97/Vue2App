@@ -15,10 +15,19 @@
   background-color: #FFCF4A !important;
 }
 .pokemon-color--bug{
+  background-color: #40d66d !important;
+}
+.pokemon-color--poison{
   background-color: #7D528D !important;
 }
 .pokemon-color--ground{
   background-color: #B2746C !important;
+}
+.pokemon-color--flying{
+  background-color: #258bff !important;
+}
+.pokemon-color--fairy{
+  background-color: #fd3974 !important;
 }
 .pokemon-color--normal{
   background-color: #fcc367 !important;
@@ -39,10 +48,19 @@
 }
 
 .pokemon-color__light--bug {
+  background-color: #5deb87 !important;
+}
+.pokemon-color__light--poison {
   background-color: rgb(151, 106, 168) !important;
 }
 .pokemon-color__light--ground {
   background-color: #C28780 !important;
+}
+.pokemon-color__light--flying{
+  background-color: #489dff !important;
+}
+.pokemon-color__light--fairy{
+  background-color: #ff6191 !important;
 }
 .pokemon-color__light--normal {
   background-color: #fdd492 !important;

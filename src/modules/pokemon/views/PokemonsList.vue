@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 import PokemonCard from '@/modules/pokemon/views/Components/PokemonCard.vue'
 import useJwt from '@/jwt/useJwt'
 export default {
