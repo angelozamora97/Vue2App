@@ -6,7 +6,11 @@
         <span><i class="fa-solid fa-moon"></i></span>
         <div class="switch-mode__circle"></div>
       </button>
-      <div class="topbar__user">
+      <div class="d-flex align-items-center">
+        <button @click="$router.push({name: 'auth-login'})">Ingresar</button>
+        <div class="topbar__user">
+          <img src="@/assets/public/pokemon-user.svg" alt="">
+        </div>
 
       </div>
 
@@ -112,5 +116,12 @@ export default {
   height: 44px;
   border-radius: 100%;
   background-color: var(--bg-color-base);
+}
+
+.topbar__user img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
 }
 </style>

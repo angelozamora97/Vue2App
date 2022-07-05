@@ -14,7 +14,7 @@
 export default {
   data(){
     return {
-      component: 'simple-layout'  
+      component: 'page-layout'  
     }
   },
   created(){

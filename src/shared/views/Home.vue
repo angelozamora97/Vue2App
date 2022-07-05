@@ -1,24 +1,19 @@
 <template>
-  <div >
-    <div class="bg-warning">
-      <b-container fluid="xl">
-        <div class="d-flex justify-content-between bg-success">
-          <div>
-            <img src="" alt="">
-          </div>
-          <div>
-            <b-button variant="primary" @click="$router.push({ name: 'auth-login'})">Login</b-button>
-          </div>
-        </div>
-        
-      </b-container>
-    </div>
-    <b-row class="mx-0 bg-danger">
-      <b-col cols="12">
-        Home page
-      </b-col>
-    </b-row>
-  </div>
+  <b-row class="mx-0 home__container">
+    <b-col cols="12">
+      <div class="home__logo">
+        <img src="@/assets/public/pokemon-logo.png" alt="">
+      </div>
+    </b-col>
+    <b-col class="pt-1">
+      <h1 class="text-center">WELCOME</h1>
+      <p class="mt-3">Esta es una pagina de prueba basado en Pokemon, podras encontrar tanto la información de los pokemoness, asi como distintos juegos y demas.
+        <br>
+        Se agradece cualquier tipo de observacion o comentario que pueda ayudarnos a mejorar la pagina.
+      </p>
+      <p class="text-center">Agradecimiento especial a PokeApi por brindarnos los servicios necesarios para poder obtener la informacion de los Pokemons</p>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -31,5 +26,18 @@ export default {
 </script>
 
 <style>
+.home__container{
+  padding-top: 20px;
+}
+.home__logo{
+  width: 60%;
+  max-width: 500px;
+  min-width: 280px;
+  margin: auto;
+}
 
+.home__logo img{
+  width: 100%;
+
+}
 </style>

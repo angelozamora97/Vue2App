@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex">
-    <!-- Slot donde ingresara el vue router -->
     <side-bar></side-bar>
     <div class="body__box">
       <top-bar></top-bar>
       <div class="body__container">
+        <!-- Slot donde ingresara el vue router -->
         <slot></slot>
       </div>
     </div>

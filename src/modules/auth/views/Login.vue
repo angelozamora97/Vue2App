@@ -1,8 +1,8 @@
 <template>
   <b-row class="mx-0 mt-5">
-    <b-col cols="11" md="9" lg="7" class="mx-auto bg-success">
+    <b-col cols="11"  lg="9" class="mx-auto bg-success">
       <div class="auth__logo">
-        <img src="@/assets/auth/pokemon-logo.png" alt="">
+        <img src="@/assets/public/pokemon-logo.png" alt="">
       </div>
       <b-form class="mt-4 py-2" @submit.prevent="handleLogin">
         <b-form-group

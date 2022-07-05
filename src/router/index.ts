@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
     component: HomeView,
     meta: {
       title : 'Home', //Para diferenciar el titulo del documento dependiendo de la vista donde este, se usa en el router
-      layout: 'simple-layout' //Para obtener el componente padre base dependiendo de la vista
+      layout: 'page-layout' //Para obtener el componente padre base dependiendo de la vista
     }
   },
   {
